@@ -14,7 +14,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    command: bash /usr/src/idaproject_test/prstart.sh
+    command: bash /usr/src/idaproject_test/devstart.sh
     volumes:
       - .:/usr/src/idaproject_test
       - media_ida:/usr/src/idaproject_test/media/
@@ -22,6 +22,13 @@ services:
       - 8000:8000
     depends_on:
       - idaproject_db
+    environment:
+      DB_PASSWORD: 123456
+      DB_USER: postgres
+      DB_NAME: postgres_db
+      DB_ENGINE: django.db.backends.postgresql
+      DB_HOST: idaproject_db
+      DB_PORT: 5432
 
 volumes:
   pg_data:

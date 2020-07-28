@@ -74,12 +74,12 @@ WSGI_APPLICATION = 'idaproject_test.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres_db',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'idaproject_db',
-        'PORT': 5432,
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DB_NAME', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': os.environ.get('DB_USER', os.path.join(BASE_DIR, '')),
+        'PASSWORD': os.environ.get('DB_PASSWORD', os.path.join(BASE_DIR, '')),
+        'HOST': os.environ.get('DB_HOST', os.path.join(BASE_DIR, '')),
+        'PORT': os.environ.get('DB_PORT', os.path.join(BASE_DIR, '')),
     }
 }
 

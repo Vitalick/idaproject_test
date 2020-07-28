@@ -4,6 +4,9 @@
 {% endblock %}
 {% block title %}Новое изображение{% endblock %}
 {% block content %}
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <p>

@@ -6,6 +6,8 @@ from django.urls import reverse
 
 class Image(models.Model):
     file = models.ImageField('файл изображения')
+    width = models.PositiveIntegerField('ширина', default=0)
+    height = models.PositiveIntegerField('высота', default=0)
 
     def __str__(self):
         return self.file.name

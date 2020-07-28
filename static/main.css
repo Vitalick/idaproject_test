@@ -8,8 +8,8 @@ body {
 }
 
 .main-container {
-    width: 480px;
-    height: 320px;
+    min-width: 480px;
+    min-height: 320px;
     background: #FFFFFF;
 
     padding: 26px 28px;
@@ -26,4 +26,8 @@ body {
 
 form input {
     display: block;
+}
+
+.error {
+    color: red;
 }

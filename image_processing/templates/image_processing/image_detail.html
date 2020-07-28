@@ -4,6 +4,9 @@
 {% endblock %}
 {% block title %}{{ image.file.name }}{% endblock %}
 {% block content %}
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
     <form method="GET">
         <p>
             <label for="width">Ширина</label>
