@@ -41,7 +41,8 @@ class ImageDetail(UpdateView):
             thumbnail = thumbnail.resize((int(thumbnail.width * ratio), int(thumbnail.height * ratio)), PIL_Image.ANTIALIAS)
         thumbnail_buffer = BytesIO()
         thumbnail.save(thumbnail_buffer, format)
-        if os.path.isfile(self.object.thumbnail.path):
+
+        if self.object.thumbnail and os.path.isfile(self.object.thumbnail.path):
             os.remove(self.object.thumbnail.path)
         self.object.thumbnail.save(self.object.file.name.split('/')[-1], ContentFile(thumbnail_buffer.getvalue()))
         thumbnail_buffer.close()
@@ -65,6 +66,9 @@ class ImageCreate(CreateView):
             except:
                 return render(request, 'image_processing/image_form.html',
                               context={'error': 'Введите верную ссылку'})
+            if response.status_code != 200:
+                return render(request, 'image_processing/image_form.html',
+                              context={'error': 'Введите верную ссылку'})
             response.raw.decode_content = True
             try:
                 img = PIL_Image.open(response.raw)
@@ -78,11 +82,5 @@ class ImageCreate(CreateView):
             new_obj.name = url.split('/')[-1]
             new_obj.save()
             file_buffer.close()
-            thumbnail = PIL_Image.open(new_obj.file)
-            thumbnail.thumbnail((new_obj.width, new_obj.height), PIL_Image.ANTIALIAS)
-            thumbnail_buffer = BytesIO()
-            thumbnail.save(thumbnail_buffer, thumbnail.format)
-            new_obj.thumbnail.save(new_obj.file.name.split('/')[-1], ContentFile(thumbnail_buffer.getvalue()))
-            thumbnail_buffer.close()
             return redirect(new_obj)
         return super().post(request, *args, **kwargs)
