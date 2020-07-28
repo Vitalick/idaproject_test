@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block head %}
+    <p><a href="/">Назад ко списку</a></p>
+{% endblock %}
+{% block title %}Новое изображение{% endblock %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <label for="url">Ссылка</label>
+            <input type="url" id="url" name="url">
+        </p>
+        <p>
+            <label for="file">Файл</label>
+            <input type="file" id="file" name="file">
+        </p>
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+{% endblock %}

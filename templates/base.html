@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <title>Idaproject test</title>
+</head>
+<body>
+<div class="main-container">
+    {% block head %}{% endblock %}
+    <h1>{% block title %}{% endblock %}</h1>
+    {% block content %}
+        <p>Нет доступных изображений</p>
+        <p><a href="#">Добавить изображение</a></p>
+    {% endblock %}
+</div>
+</body>
+</html>
