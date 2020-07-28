@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  idaproject_db:
+    image: postgres:12
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres_db
+  django:
+    container_name: idaproject_test
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash /usr/src/idaproject_test/prestart.sh
+    volumes:
+      - .:/usr/src/idaproject_test
+    ports:
+      - 8000:8000
+    depends_on:
+      - idaproject_db
+
+volumes:
+  pg_data:
