@@ -56,7 +56,7 @@ class ImageCreate(CreateView):
     def post(self, request, *args, **kwargs):
         if request.POST.get('url') and request.FILES.get('file'):
             return render(request, 'image_processing/image_form.html',
-                          context={'error': f'Заполните только одно поле ({request.FILES["file"]})'})
+                          context={'error': 'Заполните только одно поле'})
         if not (request.POST.get('url') or request.FILES.get('file')):
             return render(request, 'image_processing/image_form.html',
                           context={'error': 'Заполните одно из полей'})
@@ -74,7 +74,7 @@ class ImageCreate(CreateView):
                 img = PIL_Image.open(response.raw)
             except Exception as e:
                 return render(request, 'image_processing/image_form.html',
-                              context={'error': f'Введите ссылку на изображение ({e})'})
+                              context={'error': 'Введите ссылку на изображение'})
             file_buffer = BytesIO()
             img.save(file_buffer, img.format)
             new_obj = Image()
