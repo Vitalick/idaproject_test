@@ -14,9 +14,10 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    command: bash /usr/src/idaproject_test/prestart.sh
+    command: bash /usr/src/idaproject_test/prstart.sh
     volumes:
       - .:/usr/src/idaproject_test
+      - media_ida:/usr/src/idaproject_test/media/
     ports:
       - 8000:8000
     depends_on:
@@ -24,3 +25,4 @@ services:
 
 volumes:
   pg_data:
+  media_ida:
