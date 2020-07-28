@@ -5,7 +5,7 @@
         <p>Нет доступных изображений</p>
     {% endif %}
     {% for image in image_list %}
-        <p><a href="{{ image.get_absolute_url }}">{{ image.file.name }}</a></p>
+        <p><a href="{{ image.get_absolute_url }}">{{ image }}</a></p>
     {% endfor %}
     <p><a href="{% url 'image_create' %}">Добавить изображение</a></p>
 {% endblock %}
